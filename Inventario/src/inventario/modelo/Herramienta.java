@@ -5,16 +5,21 @@
  */
 package inventario.modelo;
 
+import java.util.Random;
+
 /**
  *
  * @author Nao Rojas
  */
 public class Herramienta extends Producto {
-    private String capacidad;
+    private int capacidad;
 
-    public Herramienta(String capacidad, String nombreProducto) {
+    public Herramienta(String nombreProducto) {
         super(nombreProducto);
-        this.capacidad = capacidad;
+        Random r = new Random();
+        
+        this.capacidad=0;
     }
-   
+    private void setCapacidad(){
+    }
 }
