@@ -68,4 +68,9 @@ public class VentanaGestionMaterial extends VentanaGestionar {
         this.mostrarMensaje("REGISTRANDO MATERIAL");
     }
     
+    
+    @Override
+    public void actualizando(){
+        this.tablaDatos.setModel(new TablaMaterial(gestorPrincipal));
+    }
 } //LLAVE CLASS

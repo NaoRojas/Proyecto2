@@ -95,7 +95,8 @@ public abstract class VentanaGestionar extends JFrame implements Observer {
 
     @Override
     public void update(Observable objeto, Object evento) {
-        repaint();
+        //repaint();
+        actualizando();
         mostrarMensaje("ACTUALIZACIÓN DE MODELO");
     }
 
@@ -104,5 +105,7 @@ public abstract class VentanaGestionar extends JFrame implements Observer {
     public abstract void ajustarEncabezadoTabla();
 
     public abstract void registrar();
+    
+    public abstract void actualizando();
 
 } //LLAVE CLASS

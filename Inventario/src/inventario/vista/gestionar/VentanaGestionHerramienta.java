@@ -68,4 +68,8 @@ public class VentanaGestionHerramienta extends VentanaGestionar {
         this.mostrarMensaje("REGISTRANDO HERRAMIENTA");
     }
 
+    @Override
+    public void actualizando(){
+        this.tablaDatos.setModel(new TablaHerramienta(gestorPrincipal));
+    }
 } //LLAVE CLASS
