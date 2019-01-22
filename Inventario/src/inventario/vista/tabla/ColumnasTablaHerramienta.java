@@ -6,7 +6,7 @@ import javax.swing.table.TableColumn;
 
 public class ColumnasTablaHerramienta extends DefaultTableColumnModel {
 
-    private static final int[] ANCHO = {102, 245, 245};
+    private static final int[] ANCHO = {50, 100, 60, 60, 90};
     
     private void inicializar() {
         int n = 0;

@@ -44,7 +44,7 @@ public class TablaHerramienta extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int indiceFila, int indiceColumna) {
-        String[] d = gestorPrincipal.getElemento(indiceFila).obtenerArregloDatos(indiceFila);
+        String[] d = gestorPrincipal.getHerramienta(indiceFila).obtenerArregloDatos();
         return d[indiceColumna];
     }
 

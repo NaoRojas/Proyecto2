@@ -8,17 +8,30 @@ import java.util.ArrayList;
 
 public class ConjuntoProducto {
 
-    private ArrayList<Producto> inventario;
-    private static int codigo;
+    private final ArrayList<Producto> inventario;
+    private static int codigoHerramienta;
+    private static int codigoMaterial;
+
+    private void ordenar() {
+        inventario.sort((t, t1) -> {
+            return (t.compareTo(t1));
+        });
+    }
 
     public ConjuntoProducto() {
-        ConjuntoProducto.codigo = 0;
+        ConjuntoProducto.codigoHerramienta = 0;
+        ConjuntoProducto.codigoMaterial = 0;
         inventario = new ArrayList<>();
     }
 
     public void agregar(Producto m) {
-        m.setCodigo(m.getCodigo() + (++codigo));
+        if (m.esMaterial()) {
+            m.setCodigo(m.getCodigo() + (++codigoMaterial));
+        } else {
+            m.setCodigo(m.getCodigo() + (++codigoHerramienta));
+        }
         inventario.add(m);
+        ordenar();
     }
 
     public Producto getElemento(int posicion) {
@@ -34,29 +47,15 @@ public class ConjuntoProducto {
         return null;
     }
 
-    /*
-    public Herramienta getHerramienta(int cod) {
-        for (Producto p : inventario) {
-            if (p.getCodigo() == cod) {
-                return ((Herramienta) p);
-            }
-        }
-        return null;
-    }
-    */
-
     public Material getMaterial(int indice) {
-        if (getElemento(indice).getCodigo() < 1999 && getElemento(indice).getCodigo() > 1000) {
-            return (Material) getElemento(indice);
-        }
-        
-        else {
-            getMaterial(++indice);
-        }
-        return null;
+        return (Material) getElemento(indice);
     }
-     
-    
+
+    public Herramienta getHerramienta(int indice) {
+        int i = indice + obtenerCantidad(1);
+        return (Herramienta) getElemento(i);
+    }
+
     public void eliminar(Producto p) {
         inventario.remove(p);
     }
@@ -76,7 +75,7 @@ public class ConjuntoProducto {
         switch (i) {
             case 1: { //MATERIAL
                 for (Producto objeto : inventario) {
-                    if (objeto.getCodigo() < 1999 && objeto.getCodigo() > 1000) {
+                    if (objeto.esMaterial()) {
                         cantidad++;
                     }
                 }
@@ -85,7 +84,7 @@ public class ConjuntoProducto {
 
             case 2: { //HERRAMIENTAS
                 for (Producto objeto : inventario) {
-                    if (objeto.getCodigo() < 2999 && objeto.getCodigo() > 2000) {
+                    if (objeto.esHerramienta()) {
                         cantidad++;
                     }
                 }
@@ -101,7 +100,7 @@ public class ConjuntoProducto {
         switch (i) {
             case 1: { //MATERIAL
                 for (Producto objeto : inventario) {
-                    if (objeto.getCodigo() < 1999 && objeto.getCodigo() > 1000) {
+                    if (objeto.esMaterial()) {
                         Material m = (Material) objeto;
                         return m.obtenerArregloDatos();
                     }
@@ -110,16 +109,74 @@ public class ConjuntoProducto {
 
             case 2: { //HERRAMIENTA
                 for (Producto objeto : inventario) {
-                    if (objeto.getCodigo() < 2999 && objeto.getCodigo() > 2000) {
+                    if (objeto.esHerramienta()) {
                         Material m = (Material) objeto;
                         m.obtenerArregloDatos();
                     }
                 }
             }
-            
+
             default: {
                 return null;
             }
+        }
+    }
+
+    public void setElementoMaterial(int codigo, Material objeto) {
+        for (Producto producto : inventario) {
+            if (producto.getCodigo() == codigo) {
+                ((Material) producto).setNombreProducto(objeto.getNombreProducto());
+                ((Material) producto).setTamanio(objeto.getTamanio());
+                ((Material) producto).setMedida(objeto.getMedida());
+                ((Material) producto).setPrecio(objeto.getPrecio());
+                ((Material) producto).setCantidad(objeto.getCantidad());
+            }
+        }
+    }
+
+    public void setElementoHerramienta(int codigo, Herramienta objeto) {
+        for (Producto producto : inventario) {
+            if (producto.getCodigo() == codigo) {
+                ((Herramienta) producto).setNombreProducto(objeto.getNombreProducto());
+                ((Herramienta) producto).setCapacidad(objeto.getCapacidad());
+                ((Herramienta) producto).setPrecio(objeto.getPrecio());
+                ((Herramienta) producto).setCantidad(objeto.getCantidad());
+            }
+        }
+    }
+
+    public String mostrarModeloMaterial() {
+        StringBuilder l = new StringBuilder();
+        for (Producto objeto : inventario) {
+            if (objeto.esMaterial()) {
+                l.append(String.format("%s%n", objeto.toString()));
+            }
+        }
+        return l.toString();
+    }
+
+    public String mostrarModeloHerramienta() {
+        StringBuilder l = new StringBuilder();
+        for (Producto objeto : inventario) {
+            if (objeto.esHerramienta()) {
+                l.append(String.format("%s%n", objeto.toString()));
+            }
+        }
+        return l.toString();
+    }
+
+    public String mostrarInformacionEspecifico(int codigo, int i) {
+        switch (i) {
+            case 1: {
+                return ((Material) buscarElementoCodigo(codigo)).toString();
+            }
+
+            case 2: {
+                return ((Herramienta) buscarElementoCodigo(codigo)).toString();
+            }
+
+            default:
+                return null;
         }
     }
 

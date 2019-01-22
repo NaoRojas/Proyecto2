@@ -3,7 +3,7 @@
 //LUIS JOSÉ BRAVO ZÚÑIGA 402380339.
 //NAOMI ROJAS HERNÁNDEZ  116920756.
 
-package inventario.vista.gestionarMaterial;
+package inventario.vista.gestionar;
 
 import inventario.controlador.Control;
 import java.awt.BorderLayout;
@@ -17,11 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 
-public class VentanaSeleccionMaterial extends JFrame implements Observer {
+public abstract class VentanaSeleccion extends JFrame implements Observer {
 
-    private final Control gestorPrincipal;
-    private final int codigoSeleccion;
+    protected final Control gestorPrincipal;
+    protected final int codigoSeleccion;
     private JLabel etiquetaTexto1;
     private JButton botonModificar;
     private JButton botonEliminar;
@@ -52,25 +53,22 @@ public class VentanaSeleccionMaterial extends JFrame implements Observer {
 
         botonEliminar.addActionListener((ae) -> {
             eliminar(codigoSeleccion);
+            cerrarVentana();
         });
 
         botonModificar.addActionListener((ae) -> {
             modificar(codigoSeleccion);
+            cerrarVentana();
         });
 
         c.add(BorderLayout.PAGE_END, panelBotones);
     }
-
-    private void eliminar(int codigo) {
-        this.gestorPrincipal.eliminarCod(codigo);
-        cerrarVentana();
-    }
-
-    private void modificar(int codigo) {
-        new VentanaModificarMaterial("MODIFICACIÓN", gestorPrincipal, codigo).init();
-        cerrarVentana();
-    }
     
+    private void eliminar(int codigo) {
+        this.gestorPrincipal.eliminar(codigo);
+        cerrarVentana();
+    }
+
     private void cerrarVentana() {
         this.gestorPrincipal.removeObs(this);
         this.dispose();
@@ -80,12 +78,16 @@ public class VentanaSeleccionMaterial extends JFrame implements Observer {
         JPanel barraMensaje = new JPanel();
         barraMensaje.setLayout(new FlowLayout(FlowLayout.CENTER));
         barraMensaje.setBackground(Color.DARK_GRAY);
-        barraMensaje.add(etiquetaTexto1 = new JLabel("Seleccione la operación a realizar: "));
+        barraMensaje.add(etiquetaTexto1 = new JLabel());
         etiquetaTexto1.setForeground(Color.WHITE);
         c.add(BorderLayout.PAGE_START, barraMensaje);
     }
 
-    public VentanaSeleccionMaterial(String titulo, Control control, int codigo) throws HeadlessException {
+    private void mostrarMensaje(String mensaje) {
+        etiquetaTexto1.setText(String.format(" %s", mensaje));
+    }
+
+    public VentanaSeleccion(String titulo, Control control, int codigo) throws HeadlessException {
         super(titulo);
         this.gestorPrincipal = control;
         this.codigoSeleccion = codigo;
@@ -95,10 +97,14 @@ public class VentanaSeleccionMaterial extends JFrame implements Observer {
     public void init() {
         this.gestorPrincipal.addObs(this);
         setVisible(true);
+        mostrarMensaje("Seleccione la operación a realizar:");
     }
 
     @Override
     public void update(Observable objeto, Object evento) {
         repaint();
     }
+
+    public abstract void modificar(int codigo);
 } //LLAVE CLASS
+

@@ -5,11 +5,12 @@
 
 package inventario.vista;
 
+import inventario.vista.factura.VentanaFactura;
 import inventario.controlador.Control;
 import inventario.vista.consultar.VentanaConsultarMaterial;
 import inventario.vista.consultar.VentanaConsultarHerramienta;
-import inventario.vista.gestionarHerramienta.VentanaGestionHerramienta;
-import inventario.vista.gestionarMaterial.VentanaGestionMaterial;
+import inventario.vista.gestionar.VentanaGestionHerramienta;
+import inventario.vista.gestionar.VentanaGestionMaterial;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -34,10 +35,12 @@ public class VentanaPrincipal extends JFrame implements Observer {
     private JLabel etiquetaTitulo;
     private JLabel etiquetaHerramienta;
     private JLabel etiquetaMaterial;
+    private JLabel etiquetaEspacio;
     private JButton botonGestionarHerramienta;
     private JButton botonConsultarHerramienta;
     private JButton botonGestionarMaterial;
     private JButton botonConsultarMaterial;
+    private JButton botonFacturas;
 
     private void inicializar() {
         ajustarComponentes(getContentPane());
@@ -95,6 +98,13 @@ public class VentanaPrincipal extends JFrame implements Observer {
         botonConsultarMaterial.addActionListener((ae) -> {
             ventanaConsultarMaterial();
         });
+        
+        panelCentral.add(etiquetaEspacio = new JLabel("ADICIONAL:        "));
+        panelCentral.add(botonFacturas = new JButton("FACTURAS"));
+        
+        botonFacturas.addActionListener((ae) -> {
+            ventanaFactura();
+        });
 
         c.add(BorderLayout.CENTER, panelCentral);
     }
@@ -117,6 +127,11 @@ public class VentanaPrincipal extends JFrame implements Observer {
     private void ventanaGestionarMaterial() {
         new VentanaGestionMaterial("GESTIONAR MATERIAL", gestorPrincipal).init();
         mostrarMensaje("GESTIONANDO INFORMACIÓN MATERIAL");
+    }
+    
+    private void ventanaFactura() {
+        new VentanaFactura("FACTURACIÓN", gestorPrincipal).init();
+        mostrarMensaje("FACTURANDO");
     }
 
     private void ajustarPanelEncabezado(Container c) {

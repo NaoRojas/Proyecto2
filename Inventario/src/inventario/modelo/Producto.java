@@ -5,7 +5,7 @@
 
 package inventario.modelo;
 
-public abstract class Producto {
+public abstract class Producto implements Comparable<Producto> {
 
     protected int codigo;
     protected String nombreProducto;
@@ -50,10 +50,25 @@ public abstract class Producto {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    
+    public boolean esHerramienta() {
+        return (codigo >= 2000 && codigo < 2999);
+    }
+    
+    public boolean esMaterial() {
+        return (codigo >= 1000 && codigo < 1999);
+    }
 
     @Override
     public String toString() {
         return String.format("%d\t%s\t%4.2f\t%d", getCodigo(), getNombreProducto(), getPrecio(), getCantidad());
         
+    }
+    
+    @Override
+    public int compareTo(Producto objeto) {
+        if(this.codigo < objeto.getCodigo())
+            return -1; //SI ES MENOR.
+        return 1; //SI ES MAYOR
     }
 } //LLAVE CLASS

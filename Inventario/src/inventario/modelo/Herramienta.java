@@ -12,13 +12,11 @@ public class Herramienta extends Producto {
     public static final String[] ATRIBUTOS = {"CODIGO", "NOMBRE", "CAPACIDAD", "PRECIO", "CANTIDAD"};
 
     private int evaluarLongitudCadena(String cadena) {
-        if (cadena.length() <= 5) {
+        if (cadena.length() <= 7) {
             return 1;
         }
-        if (cadena.length() <= 10) {
+        else {
             return 2;
-        } else {
-            return 3;
         }
     }
 
@@ -40,22 +38,26 @@ public class Herramienta extends Producto {
         switch (evaluarLongitudCadena(nombreProducto)) {
 
             case 1: {
-                return String.format("[Herramienta] \t%d\t %s\t\t\tcapacidad: %s\t precio: ₡%4.2f cantidad: %d unidad", codigo, nombreProducto, capacidad, precio, cantidad);
+                return String.format("%d\t%s\t\t%s\t\t₡%4.2f\t%d unidades", codigo, nombreProducto, capacidad, precio, cantidad);
             }
 
             case 2: {
-                return String.format("[Herramienta] \t%d\t %s\t\tcapacidad: %s\t precio: ₡%4.2f cantidad: %d unidad", codigo, nombreProducto, capacidad, precio, cantidad);
+                return String.format("%d\t%s\t%s\t\t₡%4.2f\t%d unidades", codigo, nombreProducto, capacidad, precio, cantidad);
             }
 
             default: {
-                return String.format("[Herramienta] \t%d\t %s \tcapacidad: %s\t precio: ₡%4.2f cantidad: %d unidad", codigo, nombreProducto, capacidad, precio, cantidad);
+                return null;
             }
 
         }
     }
+    
+    public String mostrarDatos() {
+        return String.format("%d\t%s\t%s", codigo, nombreProducto, capacidad);
+    }
 
     public String[] obtenerArregloDatos() {
-        String[] datos = {String.format("%d", codigo), nombreProducto, capacidad, String.format("%4.2f", precio), String.format("%d", cantidad)};
+        String[] datos = {String.format("%d", codigo), nombreProducto, capacidad, String.format("₡%4.2f", precio), String.format("%d uds.", cantidad)};
         return datos;
     }
 
