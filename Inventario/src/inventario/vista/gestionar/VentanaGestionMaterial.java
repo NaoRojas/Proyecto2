@@ -5,7 +5,7 @@
 package inventario.vista.gestionar;
 
 import inventario.controlador.Control;
-import inventario.vista.gestionar.agregar.VentanaAgregarMaterial;
+import inventario.vista.agregar.VentanaAgregarMaterial;
 import inventario.vista.tabla.ColumnasTablaMaterial;
 import inventario.vista.tabla.TablaMaterial;
 import java.awt.BorderLayout;
