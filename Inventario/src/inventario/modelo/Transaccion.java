@@ -13,22 +13,22 @@ import inventario.controlador.Control;
  */
 public class Transaccion implements Runnable {
 
-    private double x;
+    private int x;
     private Thread hiloControl;
     boolean continuar;
     private Control gestor;
     private double MIN_ANGULO = -100;
     private double MAX_ANGULO = 100;
 
-    public Transaccion(double incremento) {
+    public Transaccion(int incremento) {
         this.x = incremento;
         hiloControl = new Thread(this);
     }
 
     public Transaccion(Control c) {
-        // x = MIN_ANGULO;
         hiloControl = new Thread(this);
         gestor = c;
+        x=0;
     }
 
     public void init() {
@@ -36,18 +36,18 @@ public class Transaccion implements Runnable {
         hiloControl.start();
     }
 
-    public void contar() {
-        try {
-            while (continuar) {
-                x++;
-                String.format("%d TX/por minuto",x);
-                hiloControl.sleep(500);
-
-            }
-        } catch (InterruptedException ex) {
-        }
-
-    }
+//    public void contar() {
+//        try {
+//            while (continuar) {
+//                //x++;
+//                String.format("%d TX/por minuto",x);
+//                hiloControl.sleep(500);
+//
+//            }
+//        } catch (InterruptedException ex) {
+//        }
+//
+//    }
 
     public void finalizar() {
         continuar = false;
@@ -58,7 +58,8 @@ public class Transaccion implements Runnable {
         }
     }
 
-    public void establecerAngulo() {
+    public void setTX() {
+       gestor.setTX(x);
        
     }
 
@@ -69,7 +70,16 @@ public class Transaccion implements Runnable {
     @Override
     public void run() {
 
-        contar();
+        try {
+            while (continuar) {
+                //x++;
+                String.format("%d TX/por minuto",x);
+                hiloControl.sleep(10);
+
+            }
+        } catch (InterruptedException ex) {
+        }
+
 
     }
 }
