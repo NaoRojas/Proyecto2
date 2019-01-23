@@ -58,10 +58,7 @@ public class Transaccion implements Runnable {
         }
     }
 
-    public void setTX() {
-       gestor.setTX(x);
-       
-    }
+  
 
     public boolean getContinuar() {
         return continuar;
@@ -72,7 +69,7 @@ public class Transaccion implements Runnable {
 
         try {
             while (continuar) {
-                //x++;
+                gestor.setTX();
                 String.format("%d TX/por minuto",x);
                 hiloControl.sleep(10);
 

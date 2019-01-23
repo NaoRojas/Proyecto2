@@ -21,6 +21,8 @@ public class Control {
     }
 
     public void agregar(Producto objeto) {
+               setTX();
+
         this.modelo.agregar(objeto);
     }
 
@@ -29,10 +31,14 @@ public class Control {
     }
     
     public Producto buscarElementoCodigo(int codigo) throws Exception {
+               setTX();
+
         return (this.modelo.buscarElementoCodigo(codigo));
     }
 
     public void eliminar(int codigo) {
+               setTX();
+
         this.modelo.eliminar(codigo);
     }
 
@@ -81,21 +87,24 @@ public class Control {
     }
     
     public void agregarFactura(Factura objeto) {
+       setTX();
         modelo.agregarFactura(objeto);
     }
     
     public Factura getFactura(int indice) {
+        
         return (modelo.getFacturaIndice(indice));
     }
     
     public String mostrarFacturas() {
         return (modelo.mostrarFacturas());
     }
-     public void setTX(int i){
-    modelo.setTX(i);
+     public void setTX(){
+    modelo.setTX();
     }
-      public int getTX(){
-    return modelo.getTX();
-    }
+     public int getTX(){
+     return modelo.getTX();
+     }
+   
 
 } //LLAVE CLASS
