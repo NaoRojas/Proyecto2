@@ -53,7 +53,6 @@ public class GestorDaoHerramientas {
                 PreparedStatement stm = cnx.prepareStatement(COMANDO_AGREGAR)) {
 
             stm.clearParameters();
-
             stm.setInt(1, p.getCodigo());
             stm.setString(2, p.getNombreProducto());
             stm.setDouble(3, p.getPrecio());

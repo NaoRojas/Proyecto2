@@ -153,7 +153,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
     }
 
     private void mostrarMensaje(String mensaje) {
-        etiquetaEstado.setText(String.format("ESTADO: %s", mensaje));
+        etiquetaEstado.setText(String.format("Transaccion por minuto: %s", gestorPrincipal.getTX()));
     }
 
     public VentanaPrincipal(String titulo, Control control) throws HeadlessException {

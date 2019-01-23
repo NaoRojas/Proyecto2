@@ -94,5 +94,8 @@ public class Control {
      public void setTX(int i){
     modelo.setTX(i);
     }
+      public int getTX(){
+    return modelo.getTX();
+    }
 
 } //LLAVE CLASS

@@ -32,6 +32,7 @@ public class Modelo extends Observable {
         this.contenedorProductos = new ConjuntoProducto();
         this.contenedorFacturas = new ConjuntoFactura();
         setear();
+        TX=0;
     }
 
     public void agregar(Producto objeto) {
@@ -182,6 +183,7 @@ public class Modelo extends Observable {
         setChanged();
         notifyObservers();
         TX++;
+        
     }
 
     public void agregarFactura(Factura objeto) {
@@ -198,5 +200,12 @@ public class Modelo extends Observable {
     }
     public void setTX(int r) {
         this.TX = r;
+        actualizar();
+        
     }
+
+    public int getTX() {
+        return TX;
+    }
+    
 } //LLAVE CLASS
