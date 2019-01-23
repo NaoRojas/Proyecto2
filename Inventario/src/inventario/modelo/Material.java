@@ -27,6 +27,8 @@ public class Material extends Producto {
         super(1000, nombreProducto, precio, cantidad);
         this.tamanio = tamanio;
         this.medida = medida;
+                codigo=1000;
+
     }
 
     public Material(int codigo, String nombreProducto, double tamanio, double medida, double precio, int cantidad) {
