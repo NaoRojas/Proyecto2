@@ -91,5 +91,8 @@ public class Control {
     public String mostrarFacturas() {
         return (modelo.mostrarFacturas());
     }
+     public void setTX(int i){
+    modelo.setTX(i);
+    }
 
 } //LLAVE CLASS
