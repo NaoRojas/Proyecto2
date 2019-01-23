@@ -14,7 +14,11 @@ public class Modelo extends Observable {
     //DAO
     private GestorDaoHerramientas daoHerra = GestorDaoHerramientas.getInstancia();
     private GestorDaoMateriales daoMate = GestorDaoMateriales.getInstancia();
+    
+     private int TX;
 
+    
+     
     private void setear() {
         try {
             this.contenedorProductos.setInventario(daoHerra.recuperaHerramientas());
@@ -177,6 +181,7 @@ public class Modelo extends Observable {
     public void actualizar() {
         setChanged();
         notifyObservers();
+        TX++;
     }
 
     public void agregarFactura(Factura objeto) {
@@ -190,5 +195,8 @@ public class Modelo extends Observable {
 
     public String mostrarFacturas() {
         return (this.contenedorFacturas.toString());
+    }
+    public void setTX(int r) {
+        this.TX = r;
     }
 } //LLAVE CLASS
