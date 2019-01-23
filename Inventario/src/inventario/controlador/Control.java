@@ -28,7 +28,7 @@ public class Control {
         return (this.modelo.getElemento(posicion));
     }
     
-    public Producto buscarElementoCodigo(int codigo) {
+    public Producto buscarElementoCodigo(int codigo) throws Exception {
         return (this.modelo.buscarElementoCodigo(codigo));
     }
 

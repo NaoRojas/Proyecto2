@@ -1,29 +1,58 @@
 package inventario.modelo;
 
+import inventario.database.GestorDaoHerramientas;
+import inventario.database.GestorDaoMateriales;
+import java.sql.SQLException;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Modelo extends Observable {
 
     private final ConjuntoProducto contenedorProductos;
     private final ConjuntoFactura contenedorFacturas;
     //DAO
+    private GestorDaoHerramientas daoHerra = GestorDaoHerramientas.getInstancia();
+    private GestorDaoMateriales daoMate = GestorDaoMateriales.getInstancia();
+
+    private void setear() {
+        try {
+            this.contenedorProductos.setInventario(daoHerra.recuperaHerramientas());
+            actualizar();
+        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public Modelo() {
         this.contenedorProductos = new ConjuntoProducto();
         this.contenedorFacturas = new ConjuntoFactura();
+        setear();
     }
 
     public void agregar(Producto objeto) {
-        this.contenedorProductos.agregar(objeto);
-        actualizar();
+        try {
+            this.contenedorProductos.agregar(objeto);
+            if (objeto.getCodigo() >= 2000) {
+                this.daoHerra.agregarHerramienta((Herramienta) objeto);
+            } else {
+
+            }
+            actualizar();
+        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Producto getElemento(int indice) {
         return (this.contenedorProductos.getElemento(indice));
     }
 
-    public Producto buscarElementoCodigo(int codigo) {
-        return (this.contenedorProductos.buscarElementoCodigo(codigo));
+    public Producto buscarElementoCodigo(int codigo) throws Exception {
+        if (codigo >= 2000) {
+            return this.daoHerra.buscaPorCodigo(codigo);
+        }
+        return null;
     }
 
     public Material getMaterialPosicion(int indice) {

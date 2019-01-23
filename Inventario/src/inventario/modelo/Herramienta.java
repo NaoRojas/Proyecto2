@@ -24,6 +24,12 @@ public class Herramienta extends Producto {
         super(2000, nombreProducto, precio, cantidad);
         this.capacidad = capacidad;
     }
+    
+    public Herramienta(int codi, String nombreProducto, String capacidad, double precio, int cantidad) {
+        super(codi, nombreProducto, precio, cantidad);
+        this.capacidad = capacidad;
+    }
+
 
     public String getCapacidad() {
         return capacidad;

@@ -10,8 +10,11 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -54,12 +57,16 @@ public class VentanaModificarMaterial extends VentanaModificar {
 
     @Override
     public void llenarInformacion() {
-        Material m = (Material) this.gestorPrincipal.buscarElementoCodigo(codigoSeleccion);
-        campoNombre.setText(m.getNombreProducto());
-        campoTamaño.setText(String.format("%4.2f", m.getTamanio()));
-        campoMedida.setText(String.format("%4.2f", m.getMedida()));
-        campoPrecio.setText(String.format("%4.2f", m.getPrecio()));
-        campoCantidad.setText(String.format("%d", m.getCantidad()));
+        try {
+            Material m = (Material) this.gestorPrincipal.buscarElementoCodigo(codigoSeleccion);
+            campoNombre.setText(m.getNombreProducto());
+            campoTamaño.setText(String.format("%4.2f", m.getTamanio()));
+            campoMedida.setText(String.format("%4.2f", m.getMedida()));
+            campoPrecio.setText(String.format("%4.2f", m.getPrecio()));
+            campoCantidad.setText(String.format("%d", m.getCantidad()));
+        } catch (Exception ex) {
+            JOptionPane.showConfirmDialog(null, ex.getMessage());
+        }
     }
 
     @Override

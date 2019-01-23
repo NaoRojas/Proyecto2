@@ -5,10 +5,11 @@
 package inventario.modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ConjuntoProducto {
 
-    private final ArrayList<Producto> inventario;
+    private ArrayList<Producto> inventario;
     private static int codigoHerramienta;
     private static int codigoMaterial;
 
@@ -169,6 +170,7 @@ public class ConjuntoProducto {
         switch (i) {
             case 1: {
                 return ((Material) buscarElementoCodigo(codigo)).toString();
+                
             }
 
             case 2: {
@@ -195,4 +197,29 @@ public class ConjuntoProducto {
     public int obtenerCantidadProductos() {
         return (this.inventario.size());
     }
+
+    void setInventario(List<Producto> r) {
+        this.inventario = (ArrayList<Producto>) r;
+        setearConsecutivosCodigos();
+    }
+
+    private void setearConsecutivosCodigos() {
+        int a = obtenerCantidad(1), b = obtenerCantidad(2);
+        ConjuntoProducto.codigoMaterial = a;
+        ConjuntoProducto.codigoHerramienta = b;
+    }
+
+//    public void setearMedioInsertar(ArrayList<Material> lista, ArrayList<Herramienta> lista2) {
+//        int n = lista.size();
+//        for (int i = 0; i < n; i++) {
+//            inventario.add((Producto) lista.get(i)); //INSERTA PRIMERO MATERIALES
+//        }
+//
+//        for (int i = n; i < n + lista2.size(); i++) { //INSERTA, LUEGO, HERRAMIENTAS.
+//            inventario.add((Producto) lista2.get(i - n));
+//        }
+//
+//        this.setearConsecutivosCodigos();
+//    }
+
 }

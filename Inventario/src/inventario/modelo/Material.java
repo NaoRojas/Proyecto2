@@ -29,6 +29,12 @@ public class Material extends Producto {
         this.medida = medida;
     }
 
+    public Material(int codigo, String nombreProducto, double tamanio, double medida, double precio, int cantidad) {
+        super(codigo, nombreProducto, precio, cantidad);
+        this.tamanio = tamanio;
+        this.medida = medida;
+    }
+    
     public double getTamanio() {
         return tamanio;
     }

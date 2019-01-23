@@ -10,24 +10,27 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.HeadlessException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class VentanaModificarHerramienta extends VentanaModificar {
-    
+
     private JLabel etiquetaCapacidad;
     private JTextField campoCapacidad;
 
     public VentanaModificarHerramienta(String titulo, Control control, int codigo) throws HeadlessException {
         super(titulo, control, codigo);
     }
-    
+
     private String captarCapacidad() {
         return campoCapacidad.getText();
     }
-    
+
     @Override
     public void ajustarPanelCentro(Container c) {
         JPanel panelCentral = new JPanel();
@@ -53,11 +56,16 @@ public class VentanaModificarHerramienta extends VentanaModificar {
 
     @Override
     public void llenarInformacion() {
-        Herramienta h = (Herramienta) this.gestorPrincipal.buscarElementoCodigo(codigoSeleccion);
-        campoNombre.setText(h.getNombreProducto());
-        campoCapacidad.setText(h.getCapacidad());
-        campoPrecio.setText(String.format("%4.2f", h.getPrecio()));
-        campoCantidad.setText(String.format("%d", h.getCantidad()));
+        Herramienta h;
+        try {
+            h = (Herramienta) this.gestorPrincipal.buscarElementoCodigo(codigoSeleccion);
+            campoNombre.setText(h.getNombreProducto());
+            campoCapacidad.setText(h.getCapacidad());
+            campoPrecio.setText(String.format("%4.2f", h.getPrecio()));
+            campoCantidad.setText(String.format("%d", h.getCantidad()));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
     @Override
@@ -68,5 +76,5 @@ public class VentanaModificarHerramienta extends VentanaModificar {
             Herramienta h = new Herramienta(captarNombreProducto(), captarCapacidad(), captarPrecio(), captarCantidad());
             this.gestorPrincipal.setElementoHerramienta(codigoSeleccion, h);
         }
-    } 
+    }
 } //LLAVE CLASS

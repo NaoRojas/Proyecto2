@@ -19,7 +19,7 @@ public class ConectionDB {
 
     private static final String PROTOCOLO = "jdbc:mysql:";
     private static final String DIRECCION_SERVIDOR = "localhost";
-    private static final String BASE_DATOS = "Pulperia";
+    private static final String BASE_DATOS = "Ferreteria";
 
     private static final String USUARIO = "root";
     private static final String CLAVE = "root";

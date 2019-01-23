@@ -22,9 +22,14 @@ public class VentanaConsultarHerramienta extends VentanaConsultar {
 
     @Override
     public void mostrarInformacion() {
+        try{
         int codigo = obtenerCodigoConsulta();
         areaTexto1.setText(this.gestorPrincipal.mostrarInformacionElementoEspecifico(codigo, 2));
         this.mostrarMensaje("CONSULTA REALIZADA");
+        }
+        catch(NullPointerException ex){
+            
+        }
     }
 
     @Override

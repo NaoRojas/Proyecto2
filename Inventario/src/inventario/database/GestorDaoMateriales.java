@@ -9,15 +9,15 @@ package inventario.database;
  *
  * @author Enibeth
  */
-public class GestorDaoProducto {
-    private static GestorDaoProducto instancia = null;
+public class GestorDaoMateriales {
+    private static GestorDaoMateriales instancia = null;
     
-    public GestorDaoProducto(){
+    public GestorDaoMateriales(){
     }
     
-    public static GestorDaoProducto getInstancia(){
+    public static GestorDaoMateriales getInstancia(){
         if(instancia == null)
-            instancia = new GestorDaoProducto();
+            instancia = new GestorDaoMateriales();
         return instancia;
     }
     
