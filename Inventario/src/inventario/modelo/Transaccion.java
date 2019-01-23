@@ -28,26 +28,13 @@ public class Transaccion implements Runnable {
     public Transaccion(Control c) {
         hiloControl = new Thread(this);
         gestor = c;
-        x=0;
+        x = 0;
     }
 
     public void init() {
         continuar = true;
         hiloControl.start();
     }
-
-//    public void contar() {
-//        try {
-//            while (continuar) {
-//                //x++;
-//                String.format("%d TX/por minuto",x);
-//                hiloControl.sleep(500);
-//
-//            }
-//        } catch (InterruptedException ex) {
-//        }
-//
-//    }
 
     public void finalizar() {
         continuar = false;
@@ -58,8 +45,6 @@ public class Transaccion implements Runnable {
         }
     }
 
-  
-
     public boolean getContinuar() {
         return continuar;
     }
@@ -69,14 +54,14 @@ public class Transaccion implements Runnable {
 
         try {
             while (continuar) {
+
                 gestor.setTX();
-                String.format("%d TX/por minuto",x);
-                hiloControl.sleep(10);
+                System.out.printf("TX POR MINUTO %d \n", x);
+                Thread.sleep(500);
 
             }
         } catch (InterruptedException ex) {
         }
-
 
     }
 }
