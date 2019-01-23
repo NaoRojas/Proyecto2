@@ -19,4 +19,5 @@ public class VentanaSeleccionHerramienta extends VentanaSeleccion {
     public void modificar(int codigo) {
         new VentanaModificarHerramienta("MODIFICACIÓN", gestorPrincipal, codigo).init();
     }
+    
 }

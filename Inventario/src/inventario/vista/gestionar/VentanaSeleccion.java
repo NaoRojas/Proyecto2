@@ -102,7 +102,7 @@ public abstract class VentanaSeleccion extends JFrame implements Observer {
 
     @Override
     public void update(Observable objeto, Object evento) {
-        repaint();
+        
     }
 
     public abstract void modificar(int codigo);

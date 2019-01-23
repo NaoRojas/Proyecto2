@@ -49,7 +49,8 @@ public class ConjuntoProducto {
     }
 
     public Material getMaterial(int indice) {
-        return (Material) getElemento(indice);
+        int i = indice + obtenerCantidad(2);
+        return (Material) getElemento(i);
     }
 
     public Herramienta getHerramienta(int indice) {

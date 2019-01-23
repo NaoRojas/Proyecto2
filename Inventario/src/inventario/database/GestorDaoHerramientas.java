@@ -31,6 +31,9 @@ public class GestorDaoHerramientas {
 
     private static final String COMANDO_CONSULTA_CODIGO = "SELECT * FROM Ferreteria.herramientas WHERE codigo = ?; ";
 
+    private static final String COMANDO_MODIFICAR = "UPDATE Ferreteria.herramientas SET nombreProducto = ?, "
+            + "precio = ?, cantidad = ?, capasidad = ? WHERE codigo = ?; ";
+    
     public GestorDaoHerramientas() {
     }
 
@@ -70,7 +73,7 @@ public class GestorDaoHerramientas {
                 PreparedStatement stm = cnx.prepareStatement(COMANDO_ELIMINAR)) {
 
             stm.clearParameters();
-            stm.setLong(1, codigo);
+            stm.setInt(1, codigo);
 
             if (stm.executeUpdate() != 1) {
                 System.err.println(String.format("No se puede eliminar el registro: '%s'", codigo));
@@ -140,6 +143,28 @@ public class GestorDaoHerramientas {
                     throw new Exception(String.format("No se encuentra la herramienta: %d", codigo));
                 }
             }
+        }
+    }
+
+    public void modificaHerramienta(int codigo, Herramienta o) throws ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException,
+            SQLException,
+            Exception {
+                 try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
+                PreparedStatement stm = cnx.prepareStatement(COMANDO_MODIFICAR)) {
+
+            stm.clearParameters();
+            stm.setString(1, o.getNombreProducto());
+            stm.setDouble(2, o.getPrecio());
+            stm.setInt(3, o.getCantidad());
+            stm.setString(4, o.getCapacidad());
+            stm.setInt(5, codigo);
+            
+            if (stm.executeUpdate() != 1) {
+                throw new SQLException();
+            }
+            
         }
     }
 

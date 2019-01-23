@@ -36,7 +36,7 @@ public class Modelo extends Observable {
             if (objeto.getCodigo() >= 2000) {
                 this.daoHerra.agregarHerramienta((Herramienta) objeto);
             } else {
-
+                this.daoMate.agregarMaterial((Material) objeto);
             }
             actualizar();
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
@@ -52,6 +52,9 @@ public class Modelo extends Observable {
         if (codigo >= 2000) {
             return this.daoHerra.buscaPorCodigo(codigo);
         }
+        if (codigo < 2000) {
+            return this.daoMate.buscaPorCodigo(codigo);
+        }
         return null;
     }
 
@@ -60,17 +63,69 @@ public class Modelo extends Observable {
     }
 
     public void setElementoMaterial(int codigo, Material objeto) {
-        this.contenedorProductos.setElementoMaterial(codigo, objeto);
+        //this.contenedorProductos.setElementoMaterial(codigo, objeto);
+        
+        if(codigo < 2000){
+            try {
+                this.daoMate.modificaMaterial(codigo, objeto);
+                setear();
+            } catch (InstantiationException ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException | SQLException ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         actualizar();
     }
 
     public void setElementoHerramienta(int codigo, Herramienta objeto) {
-        this.contenedorProductos.setElementoHerramienta(codigo, objeto);
+        //this.contenedorProductos.setElementoHerramienta(codigo, objeto);
+        
+        if(codigo>= 2000){
+            try {
+                this.daoHerra.modificaHerramienta(codigo, objeto);
+                setear();
+            } catch (InstantiationException ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException | SQLException ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         actualizar();
     }
 
     public void eliminar(int codigo) {
-        this.contenedorProductos.eliminarCod(codigo);
+        if (codigo >= 2000) {
+            try {
+                this.daoHerra.eliminar(codigo);
+                setear();
+                actualizar();
+            } catch (InstantiationException ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException | SQLException ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            if (codigo < 2000) {
+                try {
+                    this.daoMate.eliminar(codigo);
+                    setear();
+                    actualizar();
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException | SQLException ex) {
+                    Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
         actualizar();
     }
 
