@@ -6,7 +6,6 @@ package inventario;
 
 import inventario.controlador.Control;
 import inventario.modelo.Modelo;
-import inventario.modelo.Transaccion;
 import inventario.vista.VentanaPrincipal;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -35,8 +34,8 @@ public class Inventario {
     public static void mostrarInterfaz() {
 
        Control c= new Control(new Modelo());
-       Transaccion t= new Transaccion(c);
-       t.init();
+//       Transaccion t= new Transaccion(c);
+//       t.init();
         new VentanaPrincipal("INVENTARIO", c).init();
     }
 
