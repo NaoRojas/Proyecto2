@@ -39,9 +39,9 @@ public class ConjuntoProducto {
 
     public void agregar(Producto m) {
         if (m.esMaterial()) {
-            m.setCodigo(m.getCodigo() + (++codigoMaterial));
+            m.setCodigo(m.getCodigo() + (codigoMaterial++));//++codigoMaterial
         } else {
-            m.setCodigo(m.getCodigo() + (++codigoHerramienta));
+            m.setCodigo(m.getCodigo() + (codigoHerramienta++));
         }
         inventario.add(m);
         ordenar();
