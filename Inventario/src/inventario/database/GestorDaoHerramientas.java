@@ -1,5 +1,6 @@
 package inventario.database;
 
+import inventario.modelo.ConjuntoProducto;
 import inventario.modelo.Herramienta;
 import inventario.modelo.Material;
 import inventario.modelo.Producto;
@@ -34,6 +35,9 @@ public class GestorDaoHerramientas {
     private static final String COMANDO_MODIFICAR = "UPDATE Ferreteria.herramientas SET nombreProducto = ?, "
             + "precio = ?, cantidad = ?, capasidad = ? WHERE codigo = ?; ";
     
+    private static final String COMANDO_ELIMINA_DATOS_TABLA = "TRUNCATE TABLE Ferreteria.herramientas;";
+    
+    
     public GestorDaoHerramientas() {
     }
 
@@ -53,6 +57,7 @@ public class GestorDaoHerramientas {
                 PreparedStatement stm = cnx.prepareStatement(COMANDO_AGREGAR)) {
 
             stm.clearParameters();
+
             stm.setInt(1, p.getCodigo());
             stm.setString(2, p.getNombreProducto());
             stm.setDouble(3, p.getPrecio());
@@ -83,20 +88,6 @@ public class GestorDaoHerramientas {
 
     public List<Producto> recuperaHerramientas() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         List<Producto> lista = new ArrayList<>();
-        try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
-                Statement stm = cnx.createStatement()) {
-            ResultSet rs = stm.executeQuery(COMANDO_TODOS);
-
-            while (rs.next()) {
-                Producto p = new Herramienta(
-                        rs.getInt("codigo"),
-                        rs.getString("nombreProducto"),
-                        rs.getString("capasidad"),
-                        rs.getDouble("precio"),
-                        rs.getInt("cantidad"));
-                lista.add((Herramienta) p);
-            }
-        }
 
         try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
                 Statement stm = cnx.createStatement()) {
@@ -112,6 +103,21 @@ public class GestorDaoHerramientas {
                         rs.getInt("cantidad"));
 
                 lista.add((Material) a);
+            }
+        }
+        
+        try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
+                Statement stm = cnx.createStatement()) {
+            ResultSet rs = stm.executeQuery(COMANDO_TODOS);
+
+            while (rs.next()) {
+                Producto p = new Herramienta(
+                        rs.getInt("codigo"),
+                        rs.getString("nombreProducto"),
+                        rs.getString("capasidad"),
+                        rs.getDouble("precio"),
+                        rs.getInt("cantidad"));
+                lista.add((Herramienta) p);
             }
         }
         return lista;
@@ -164,6 +170,20 @@ public class GestorDaoHerramientas {
                 throw new SQLException();
             }
             
+        }
+    }
+
+    public void eliminarTodos() throws SQLException, 
+            ClassNotFoundException, 
+            InstantiationException, 
+            IllegalAccessException {
+         try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
+                PreparedStatement stm = cnx.prepareStatement(COMANDO_ELIMINA_DATOS_TABLA)) {
+
+//            if (stm.executeUpdate() != 1) {
+//                throw new SQLException();
+//            }
+ 
         }
     }
 

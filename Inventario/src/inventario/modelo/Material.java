@@ -27,14 +27,16 @@ public class Material extends Producto {
         super(1000, nombreProducto, precio, cantidad);
         this.tamanio = tamanio;
         this.medida = medida;
-                codigo=1000;
-
     }
 
     public Material(int codigo, String nombreProducto, double tamanio, double medida, double precio, int cantidad) {
         super(codigo, nombreProducto, precio, cantidad);
         this.tamanio = tamanio;
         this.medida = medida;
+    }
+    
+    public Material(){
+        this(0,"",0,0,0,0);
     }
     
     public double getTamanio() {
@@ -49,6 +51,7 @@ public class Material extends Producto {
         return medida;
     }
 
+    
     public void setMedida(double medida) {
         this.medida = medida;
     }
@@ -83,4 +86,52 @@ public class Material extends Producto {
         return datos;
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    //@XmlElementRef
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    
+    @Override
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    //@XmlElementRef
+    @Override
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    
+    @Override
+    public double getPrecio() {
+        return precio;
+    }
+
+    //@XmlElementRef
+    @Override
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    @Override
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    //@XmlElementRef
+    @Override
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    
+    
 } //LLAVE CLASS
+

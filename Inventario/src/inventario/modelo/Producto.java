@@ -5,6 +5,18 @@
 
 package inventario.modelo;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+
+@XmlTransient
+//@XmlAccessorType(XmlAccessType.FIELD) 
+@XmlSeeAlso({
+    Herramienta.class,
+    Material.class
+})
+@XmlAccessorType(XmlAccessType.FIELD) 
 public abstract class Producto implements Comparable<Producto> {
 
     protected int codigo;
@@ -19,6 +31,10 @@ public abstract class Producto implements Comparable<Producto> {
         this.cantidad = cantidad;
     }
 
+    public Producto(){
+        this(0,"",0,0);
+    }
+    
     public int getCodigo() {
         return codigo;
     }
@@ -72,3 +88,4 @@ public abstract class Producto implements Comparable<Producto> {
         return 1; //SI ES MAYOR
     }
 } //LLAVE CLASS
+

@@ -4,12 +4,24 @@
 //NAOMI ROJAS HERNÁNDEZ  116920756.
 package inventario.modelo;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD) 
 public class ConjuntoProducto {
 
-    private ArrayList<Producto> inventario;
+    private List<Producto> inventario;
     private static int codigoHerramienta;
     private static int codigoMaterial;
 
@@ -66,6 +78,7 @@ public class ConjuntoProducto {
         for (Producto p : inventario) {
             if (p.getCodigo() == cod) {
                 inventario.remove(p);
+                this.ordenar();
                 return true;
             }
         }
@@ -223,4 +236,57 @@ public class ConjuntoProducto {
 //        this.setearConsecutivosCodigos();
 //    }
 
+
+    public static int getCodigoHerramienta() {
+        return codigoHerramienta;
+    }
+
+    //@XmlElement
+    public static void setCodigoHerramienta(int codigoHerramienta) {
+        ConjuntoProducto.codigoHerramienta = codigoHerramienta;
+    }
+
+    public static int getCodigoMaterial() {
+        return codigoMaterial;
+    }
+
+    //@XmlElement
+    public static void setCodigoMaterial(int codigoMaterial) {
+        ConjuntoProducto.codigoMaterial = codigoMaterial;
+    }
+ 
+
+//    public void setearMedioInsertar(ArrayList<Material> lista, ArrayList<Herramienta> lista2) {
+//        int n = lista.size();
+//        for (int i = 0; i < n; i++) {
+//            inventario.add((Producto) lista.get(i)); //INSERTA PRIMERO MATERIALES
+//        }
+//
+//        for (int i = n; i < n + lista2.size(); i++) { //INSERTA, LUEGO, HERRAMIENTAS.
+//            inventario.add((Producto) lista2.get(i - n));
+//        }
+//
+//        this.setearConsecutivosCodigos();
+//    }
+    
+    public void guardar(OutputStream salida) throws JAXBException {
+        JAXBContext contexto = JAXBContext.newInstance(this.getClass());
+        Marshaller marshaller = contexto.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        marshaller.marshal(this, salida);
+    }
+
+    public static ConjuntoProducto recuperar(InputStream entrada)throws JAXBException {
+        //throw new UnsupportedOperationException();
+        JAXBContext context = JAXBContext.newInstance(ConjuntoProducto.class);
+        Unmarshaller mar = context.createUnmarshaller();
+        return (ConjuntoProducto)mar.unmarshal(entrada);
+    }
+
+    public List<Producto> getInventario() {
+        return inventario;
+    }
+
+    
 }

@@ -6,7 +6,7 @@
 package inventario.modelo;
 
 public class Herramienta extends Producto {
-
+    
     private String capacidad;
 
     public static final String[] ATRIBUTOS = {"CODIGO", "NOMBRE", "CAPACIDAD", "PRECIO", "CANTIDAD"};
@@ -30,6 +30,9 @@ public class Herramienta extends Producto {
         this.capacidad = capacidad;
     }
 
+    public Herramienta(){
+        this(0, "", "", 0, 0);
+    }
 
     public String getCapacidad() {
         return capacidad;
@@ -67,4 +70,46 @@ public class Herramienta extends Producto {
         return datos;
     }
 
+    @Override
+    public int getCodigo() {
+        return codigo;
+    }
+
+    @Override
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    @Override
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    @Override
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+
+    @Override
+    public double getPrecio() {
+        return precio;
+    }
+
+    @Override
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    @Override
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    
+    @Override
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    
 } //LLAVE CLASS

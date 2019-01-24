@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -30,7 +31,9 @@ public class GestorDaoMateriales {
 
     private static final String COMANDO_MODIFICAR = "UPDATE Ferreteria.materiales SET nombreProducto = ?, "
             + "precio = ?, cantidad = ?, tamanio = ?, medida = ? WHERE codigo = ?; ";
-    
+
+    private static final String COMANDO_ELIMINA_DATOS_TABLA = "TRUNCATE TABLE Ferreteria.materiales;";
+
     public GestorDaoMateriales() {
     }
 
@@ -107,9 +110,9 @@ public class GestorDaoMateriales {
         }
     }
 
-    public void eliminar(int codigo) throws ClassNotFoundException, 
-            InstantiationException, 
-            IllegalAccessException, 
+    public void eliminar(int codigo) throws ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException,
             SQLException {
         try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
                 PreparedStatement stm = cnx.prepareStatement(COMANDO_ELIMINAR)) {
@@ -123,13 +126,13 @@ public class GestorDaoMateriales {
             }
         }
     }
-    
+
     public void modificaMaterial(int codigo, Material o) throws ClassNotFoundException,
             InstantiationException,
             IllegalAccessException,
             SQLException,
             Exception {
-                 try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
+        try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
                 PreparedStatement stm = cnx.prepareStatement(COMANDO_MODIFICAR)) {
 
             stm.clearParameters();
@@ -138,8 +141,8 @@ public class GestorDaoMateriales {
             stm.setInt(3, o.getCantidad());
             stm.setDouble(4, o.getTamanio());
             stm.setDouble(5, o.getMedida());
-            stm.setInt(6, o.getCodigo());
-            
+            stm.setInt(6, codigo);
+
             if (stm.executeUpdate() != 1) {
                 throw new SQLException();
             }
@@ -147,4 +150,32 @@ public class GestorDaoMateriales {
         }
     }
 
+    public void agregarTodosMateriales(List<Producto> lista) throws SQLException,
+            InstantiationException,
+            ClassNotFoundException,
+            IllegalAccessException {
+
+        try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
+                PreparedStatement stm = cnx.prepareStatement(COMANDO_ELIMINA_DATOS_TABLA)) {
+            for (Producto p : lista) {
+                if (p.getCodigo() < 2000) {
+                    this.agregarMaterial((Material) p);
+                }
+            }
+        }
+    }
+
+    public void eliminarTodos() throws SQLException,
+            ClassNotFoundException,
+            InstantiationException,
+            IllegalAccessException {
+        try (Connection cnx = ConectionDB.getInstancia().obtenerConexion();
+                PreparedStatement stm = cnx.prepareStatement(COMANDO_ELIMINA_DATOS_TABLA)) {
+
+//            if (stm.executeUpdate() != 1) {
+//                throw new SQLException();
+//            }
+
+        }
+    }
 }
