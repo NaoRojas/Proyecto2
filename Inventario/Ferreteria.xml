@@ -50,7 +50,7 @@
     </inventario>
     <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
         <codigo>1007</codigo>
-        <nombreProducto>Arandela plana</nombreProducto>
+        <nombreProducto>Arandelaaaaaa plana</nombreProducto>
         <precio>350.0</precio>
         <cantidad>300</cantidad>
         <tamanio>5.16</tamanio>
@@ -120,4 +120,6 @@
         <cantidad>200</cantidad>
         <capacidad>70</capacidad>
     </inventario>
+    <codigoHerramienta>9</codigoHerramienta>
+    <codigoMaterial>9</codigoMaterial>
 </conjuntoProducto>

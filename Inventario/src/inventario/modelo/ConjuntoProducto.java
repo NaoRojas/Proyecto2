@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ConjuntoProducto {
 
     private List<Producto> inventario;
-    private static int codigoHerramienta;
-    private static int codigoMaterial;
+    private int codigoHerramienta;
+    private int codigoMaterial;
 
     private void ordenar() {
         inventario.sort((t, t1) -> {
@@ -32,8 +32,8 @@ public class ConjuntoProducto {
     }
 
     public ConjuntoProducto() {
-        ConjuntoProducto.codigoHerramienta = 0;
-        ConjuntoProducto.codigoMaterial = 0;
+        this.codigoHerramienta = 0;
+        this.codigoMaterial = 0;
         inventario = new ArrayList<>();
     }
 
@@ -233,8 +233,8 @@ public class ConjuntoProducto {
 
     private void setearConsecutivosCodigos() {
         int a = obtenerCantidad(1), b = obtenerCantidad(2);
-        ConjuntoProducto.codigoMaterial = a;
-        ConjuntoProducto.codigoHerramienta = b;
+        this.codigoMaterial = a;
+        this.codigoHerramienta = b;
     }
 
 //    public void setearMedioInsertar(ArrayList<Material> lista, ArrayList<Herramienta> lista2) {
@@ -249,22 +249,22 @@ public class ConjuntoProducto {
 //
 //        this.setearConsecutivosCodigos();
 //    }
-    public static int getCodigoHerramienta() {
+    public int getCodigoHerramienta() {
         return codigoHerramienta;
     }
 
     //@XmlElement
-    public static void setCodigoHerramienta(int codigoHerramienta) {
-        ConjuntoProducto.codigoHerramienta = codigoHerramienta;
+    public void setCodigoHerramienta(int codigoHerramienta) {
+        this.codigoHerramienta = codigoHerramienta;
     }
 
-    public static int getCodigoMaterial() {
+    public int getCodigoMaterial() {
         return codigoMaterial;
     }
 
     //@XmlElement
-    public static void setCodigoMaterial(int codigoMaterial) {
-        ConjuntoProducto.codigoMaterial = codigoMaterial;
+    public void setCodigoMaterial(int codigoMaterial) {
+        this.codigoMaterial = codigoMaterial;
     }
 
 //    public void setearMedioInsertar(ArrayList<Material> lista, ArrayList<Herramienta> lista2) {
@@ -297,5 +297,7 @@ public class ConjuntoProducto {
     public List<Producto> getInventario() {
         return inventario;
     }
+    
+    
 
 }
