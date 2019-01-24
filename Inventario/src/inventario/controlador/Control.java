@@ -10,19 +10,27 @@ import inventario.modelo.Material;
 import inventario.modelo.Modelo;
 import inventario.modelo.Producto;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class Control {
+public class Control implements Runnable {
 
     private final Modelo modelo;
     private boolean continuar;
+    private int x;
+    private Thread hiloControl;
+    int seg;
 
     public Control(Modelo modelo) {
         this.modelo = modelo;
         continuar = false;
+        x = 0;
+        hiloControl = new Thread(this);
+        init();
     }
 
     public void agregar(Producto objeto) {
-        continuar = true;
+        incrementarTX();
         this.modelo.agregar(objeto);
     }
 
@@ -37,7 +45,7 @@ public class Control {
     }
 
     public void eliminar(int codigo) {
-        continuar = true;
+        incrementarTX();
         this.modelo.eliminar(codigo);
     }
 
@@ -60,12 +68,12 @@ public class Control {
     }
 
     public void setElementoMaterial(int codigo, Material objeto) {
-        continuar = true;
+        incrementarTX();
         this.modelo.setElementoMaterial(codigo, objeto);
     }
 
     public void setElementoHerramienta(int codigo, Herramienta objeto) {
-        continuar = true;
+        incrementarTX();
         this.modelo.setElementoHerramienta(codigo, objeto);
     }
 
@@ -78,7 +86,7 @@ public class Control {
     }
 
     public String mostrarInformacionElementoEspecifico(int codigo, int i) {
-        continuar = true;
+        incrementarTX();
         return (modelo.mostrarInformacionEspecifico(codigo, i));
     }
 
@@ -91,7 +99,7 @@ public class Control {
     }
 
     public void agregarFactura(Factura objeto) {
-        continuar = true;
+        incrementarTX();
 
         modelo.agregarFactura(objeto);
     }
@@ -105,11 +113,9 @@ public class Control {
         return (modelo.mostrarFacturas());
     }
 
-    public void setTX() {
-        if (continuar) {
-            modelo.setTX();
-        }
-        continuar = false;
+    public void setTX(int i) {
+        modelo.setTX(i);
+
     }
 
     public int getTX() {
@@ -124,4 +130,35 @@ public class Control {
         return continuar;
     }
 
+    public void incrementarTX() {
+        x++;
+    }
+
+    @Override
+    public void run() {
+        try {
+    
+            while (continuar) {
+                seg+=500;
+                      if(seg==60000){
+              restart();
+                      }
+                setTX(x);
+                System.out.printf("Seg %d Tx por minuto %d \n", seg, x);
+                Thread.sleep(500);
+            }
+
+        } catch (InterruptedException ex) {
+        }
+
+    }
+
+    public void init() {
+        continuar = true;
+        hiloControl.start();
+    }
+
+    public void restart() {
+        x = 0;
+    }
 } //LLAVE CLASS
