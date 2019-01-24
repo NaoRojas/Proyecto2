@@ -71,7 +71,6 @@ public class ConjuntoProducto {
 //        int i = indice + obtenerCantidad(1);
 //        return (Herramienta) getElemento(i);
 //    }
-    
     public Material getMaterial(int indice) {
         //int i = indice + obtenerCantidad(1);
         ordenar();
@@ -232,9 +231,14 @@ public class ConjuntoProducto {
     }
 
     private void setearConsecutivosCodigos() {
-        int a = obtenerCantidad(1), b = obtenerCantidad(2);
-        this.codigoMaterial = a;
-        this.codigoHerramienta = b;
+        ordenar();
+        int a = obtenerCantidad(1);
+//        this.codigoMaterial = a;
+//        this.codigoHerramienta = b;
+        int conMate = inventario.get(a - 1).getCodigo() % 1000;
+        int conHerra = inventario.get(inventario.size() - 1).getCodigo() % 2000;
+        this.codigoMaterial = conMate + 1;
+        this.codigoHerramienta = conHerra + 1;
     }
 
 //    public void setearMedioInsertar(ArrayList<Material> lista, ArrayList<Herramienta> lista2) {
@@ -297,7 +301,5 @@ public class ConjuntoProducto {
     public List<Producto> getInventario() {
         return inventario;
     }
-    
-    
 
 }
