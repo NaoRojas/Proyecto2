@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<conjuntoProducto>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
+        <codigo>1001</codigo>
+        <nombreProducto>Clavos</nombreProducto>
+        <precio>400.0</precio>
+        <cantidad>300</cantidad>
+        <tamanio>2.0</tamanio>
+        <medida>2.0</medida>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
+        <codigo>1002</codigo>
+        <nombreProducto>Tornillo Punta Broca</nombreProducto>
+        <precio>6000.0</precio>
+        <cantidad>300</cantidad>
+        <tamanio>0.5</tamanio>
+        <medida>2.0</medida>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
+        <codigo>1003</codigo>
+        <nombreProducto>Tornillo Techo punta Broca</nombreProducto>
+        <precio>14000.0</precio>
+        <cantidad>300</cantidad>
+        <tamanio>2.0</tamanio>
+        <medida>4.0</medida>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
+        <codigo>1004</codigo>
+        <nombreProducto>Tornillo Torkack Punta Fina</nombreProducto>
+        <precio>6000.0</precio>
+        <cantidad>300</cantidad>
+        <tamanio>0.2</tamanio>
+        <medida>2.0</medida>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
+        <codigo>1005</codigo>
+        <nombreProducto>Tornillo Gypsum punta Fina</nombreProducto>
+        <precio>1000.0</precio>
+        <cantidad>300</cantidad>
+        <tamanio>1.0</tamanio>
+        <medida>4.3</medida>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
+        <codigo>1006</codigo>
+        <nombreProducto>Tornillo Gypsum punta broca</nombreProducto>
+        <precio>14000.0</precio>
+        <cantidad>300</cantidad>
+        <tamanio>1.0</tamanio>
+        <medida>4.3</medida>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
+        <codigo>1007</codigo>
+        <nombreProducto>Arandela plana</nombreProducto>
+        <precio>350.0</precio>
+        <cantidad>300</cantidad>
+        <tamanio>5.16</tamanio>
+        <medida>10.0</medida>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="material">
+        <codigo>1008</codigo>
+        <nombreProducto>Tornillo de carroceria</nombreProducto>
+        <precio>430.0</precio>
+        <cantidad>300</cantidad>
+        <tamanio>1.4</tamanio>
+        <medida>10.0</medida>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="herramienta">
+        <codigo>2001</codigo>
+        <nombreProducto>Lupa</nombreProducto>
+        <precio>1000.0</precio>
+        <cantidad>100</cantidad>
+        <capacidad>1</capacidad>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="herramienta">
+        <codigo>2002</codigo>
+        <nombreProducto>Sierra</nombreProducto>
+        <precio>35000.0</precio>
+        <cantidad>20</cantidad>
+        <capacidad>20</capacidad>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="herramienta">
+        <codigo>2003</codigo>
+        <nombreProducto>Alicate</nombreProducto>
+        <precio>23000.0</precio>
+        <cantidad>40</cantidad>
+        <capacidad>10</capacidad>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="herramienta">
+        <codigo>2004</codigo>
+        <nombreProducto>Tijeras</nombreProducto>
+        <precio>10000.0</precio>
+        <cantidad>100</cantidad>
+        <capacidad>8</capacidad>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="herramienta">
+        <codigo>2005</codigo>
+        <nombreProducto>Destornillador</nombreProducto>
+        <precio>5300.0</precio>
+        <cantidad>100</cantidad>
+        <capacidad>23</capacidad>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="herramienta">
+        <codigo>2006</codigo>
+        <nombreProducto>Remachadora</nombreProducto>
+        <precio>28000.0</precio>
+        <cantidad>40</cantidad>
+        <capacidad>20</capacidad>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="herramienta">
+        <codigo>2007</codigo>
+        <nombreProducto>Escariador</nombreProducto>
+        <precio>33500.0</precio>
+        <cantidad>60</cantidad>
+        <capacidad>40</capacidad>
+    </inventario>
+    <inventario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="herramienta">
+        <codigo>2008</codigo>
+        <nombreProducto>Martillo </nombreProducto>
+        <precio>12000.0</precio>
+        <cantidad>200</cantidad>
+        <capacidad>70</capacidad>
+    </inventario>
+</conjuntoProducto>

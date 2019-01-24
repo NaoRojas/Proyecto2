@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD) 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ConjuntoProducto {
 
     private List<Producto> inventario;
@@ -61,8 +61,10 @@ public class ConjuntoProducto {
     }
 
     public Material getMaterial(int indice) {
-        int i = indice + obtenerCantidad(2);
-        return (Material) getElemento(i);
+//        int i = indice + obtenerCantidad(2);
+//        return (Material) getElemento(i);
+        ordenar();
+        return (Material) getElemento(indice);
     }
 
     public Herramienta getHerramienta(int indice) {
@@ -184,7 +186,7 @@ public class ConjuntoProducto {
         switch (i) {
             case 1: {
                 return ((Material) buscarElementoCodigo(codigo)).toString();
-                
+
             }
 
             case 2: {
@@ -235,8 +237,6 @@ public class ConjuntoProducto {
 //
 //        this.setearConsecutivosCodigos();
 //    }
-
-
     public static int getCodigoHerramienta() {
         return codigoHerramienta;
     }
@@ -254,7 +254,6 @@ public class ConjuntoProducto {
     public static void setCodigoMaterial(int codigoMaterial) {
         ConjuntoProducto.codigoMaterial = codigoMaterial;
     }
- 
 
 //    public void setearMedioInsertar(ArrayList<Material> lista, ArrayList<Herramienta> lista2) {
 //        int n = lista.size();
@@ -268,7 +267,6 @@ public class ConjuntoProducto {
 //
 //        this.setearConsecutivosCodigos();
 //    }
-    
     public void guardar(OutputStream salida) throws JAXBException {
         JAXBContext contexto = JAXBContext.newInstance(this.getClass());
         Marshaller marshaller = contexto.createMarshaller();
@@ -277,16 +275,15 @@ public class ConjuntoProducto {
         marshaller.marshal(this, salida);
     }
 
-    public static ConjuntoProducto recuperar(InputStream entrada)throws JAXBException {
+    public static ConjuntoProducto recuperar(InputStream entrada) throws JAXBException {
         //throw new UnsupportedOperationException();
         JAXBContext context = JAXBContext.newInstance(ConjuntoProducto.class);
         Unmarshaller mar = context.createUnmarshaller();
-        return (ConjuntoProducto)mar.unmarshal(entrada);
+        return (ConjuntoProducto) mar.unmarshal(entrada);
     }
 
     public List<Producto> getInventario() {
         return inventario;
     }
 
-    
 }

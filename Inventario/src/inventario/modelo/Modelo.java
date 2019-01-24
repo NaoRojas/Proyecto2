@@ -2,10 +2,14 @@ package inventario.modelo;
 
 import inventario.database.GestorDaoHerramientas;
 import inventario.database.GestorDaoMateriales;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 
 public class Modelo extends Observable {
 
@@ -14,7 +18,7 @@ public class Modelo extends Observable {
     //DAO
     private GestorDaoHerramientas daoHerra = GestorDaoHerramientas.getInstancia();
     private GestorDaoMateriales daoMate = GestorDaoMateriales.getInstancia();
-    
+    private final String RUTA = "./Ferreteria.xml";
      private int TX;
 
     
@@ -32,7 +36,26 @@ public class Modelo extends Observable {
         this.contenedorProductos = new ConjuntoProducto();
         this.contenedorFacturas = new ConjuntoFactura();
         setear();
-        
+        //recuperar();
+    }
+    
+    public void recuperar() {
+        try {
+            if (this.contenedorProductos.getInventario().isEmpty()) {
+                List<Producto> li = ConjuntoProducto.recuperar(new FileInputStream(RUTA)).getInventario();
+                this.contenedorProductos.setInventario(li);
+            }
+            else{
+                this.daoHerra.eliminarTodos();
+                this.daoMate.eliminarTodos();
+                List<Producto> li = ConjuntoProducto.recuperar(new FileInputStream(RUTA)).getInventario();
+                this.contenedorProductos.setInventario(li);
+            }
+            actualizar();
+
+        } catch (FileNotFoundException | JAXBException | SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void agregar(Producto objeto) {
