@@ -41,6 +41,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
     private JButton botonGestionarMaterial;
     private JButton botonConsultarMaterial;
     private JButton botonFacturas;
+    private JButton botonRecupera;
 
     private void inicializar() {
         ajustarComponentes(getContentPane());
@@ -101,11 +102,17 @@ public class VentanaPrincipal extends JFrame implements Observer {
         
         panelCentral.add(etiquetaEspacio = new JLabel("ADICIONAL:        "));
         panelCentral.add(botonFacturas = new JButton("FACTURAS"));
+        panelCentral.add(botonRecupera = new JButton("RESTABLECER"));
         
         botonFacturas.addActionListener((ae) -> {
             ventanaFactura();
         });
 
+        botonRecupera.addActionListener((ae)-> {
+            gestorPrincipal.recuperar();
+        });
+
+        
         c.add(BorderLayout.CENTER, panelCentral);
     }
     

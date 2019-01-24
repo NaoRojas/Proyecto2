@@ -161,4 +161,8 @@ public class Control implements Runnable {
     public void restart() {
         x = 0;
     }
+
+    public void recuperar() {
+        modelo.recuperar();
+    }
 } //LLAVE CLASS

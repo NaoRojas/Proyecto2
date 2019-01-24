@@ -60,14 +60,26 @@ public class ConjuntoProducto {
         return null;
     }
 
+//    public Material getMaterial(int indice) {
+////        int i = indice + obtenerCantidad(2);
+////        return (Material) getElemento(i);
+//        ordenar();
+//        return (Material) getElemento(indice);
+//    }
+//
+//    public Herramienta getHerramienta(int indice) {
+//        int i = indice + obtenerCantidad(1);
+//        return (Herramienta) getElemento(i);
+//    }
+    
     public Material getMaterial(int indice) {
-//        int i = indice + obtenerCantidad(2);
-//        return (Material) getElemento(i);
+        //int i = indice + obtenerCantidad(1);
         ordenar();
         return (Material) getElemento(indice);
     }
 
     public Herramienta getHerramienta(int indice) {
+        ordenar();
         int i = indice + obtenerCantidad(1);
         return (Herramienta) getElemento(i);
     }

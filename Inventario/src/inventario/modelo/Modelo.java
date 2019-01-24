@@ -13,7 +13,7 @@ import javax.xml.bind.JAXBException;
 
 public class Modelo extends Observable {
 
-    private final ConjuntoProducto contenedorProductos;
+    private ConjuntoProducto contenedorProductos;
     private final ConjuntoFactura contenedorFacturas;
     //DAO
     private GestorDaoHerramientas daoHerra = GestorDaoHerramientas.getInstancia();
@@ -42,14 +42,43 @@ public class Modelo extends Observable {
     public void recuperar() {
         try {
             if (this.contenedorProductos.getInventario().isEmpty()) {
-                List<Producto> li = ConjuntoProducto.recuperar(new FileInputStream(RUTA)).getInventario();
-                this.contenedorProductos.setInventario(li);
-            }
-            else{
-                this.daoHerra.eliminarTodos();
-                this.daoMate.eliminarTodos();
-                List<Producto> li = ConjuntoProducto.recuperar(new FileInputStream(RUTA)).getInventario();
-                this.contenedorProductos.setInventario(li);
+                this.contenedorProductos.setInventario(ConjuntoProducto.recuperar(new FileInputStream(RUTA)).getInventario());
+                for (Producto p : contenedorProductos.getInventario()) {
+                    if (p.getCodigo() >= 2000) {
+                        daoHerra.agregarHerramienta((Herramienta) p);
+                    } else {
+                        if (p.getCodigo() < 2000) {
+                            daoMate.agregarMaterial((Material) p);
+                        }
+                    }
+                }
+            } else {
+                //this.daoHerra.eliminarTodos();
+                //this.daoMate.eliminarTodos();
+                //List<Producto> li = ConjuntoProducto.recuperar(new FileInputStream(RUTA)).getInventario();
+                //this.contenedorProductos.setInventario(li);
+                for (Producto p : contenedorProductos.getInventario()) {
+                    if (p.getCodigo() < 2000) {
+                        daoMate.eliminar(p.getCodigo());
+                    } else {
+                        if (p.getCodigo() >= 2000) {
+                            daoHerra.eliminar(p.getCodigo());
+                        }
+                    }
+                }
+                this.contenedorProductos = new ConjuntoProducto();
+                //this.contenedorProductos.setInventario(ConjuntoProducto.recuperar(new FileInputStream(RUTA)).getInventario());
+                this.contenedorProductos = ConjuntoProducto.recuperar(new FileInputStream(RUTA));
+                for (Producto p : contenedorProductos.getInventario()) {
+                    if (p.getCodigo() < 2000) {
+                        daoMate.agregarMaterial((Material) p);
+                    } else {
+                        if (p.getCodigo() >= 2000) {
+                            daoHerra.agregarHerramienta((Herramienta) p);
+                        }
+                    }
+                }
+
             }
             actualizar();
 
