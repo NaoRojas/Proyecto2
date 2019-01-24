@@ -202,9 +202,10 @@ public class Modelo extends Observable {
     public int getTX() {
         return TX;
     }
-    public void setTX() {
-        this.TX ++;
-    
+    public void setTX(int i) {
+        this.TX=i;
+    notifyObservers();
+    setChanged();
     }
 
     

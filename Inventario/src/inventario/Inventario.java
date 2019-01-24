@@ -9,6 +9,7 @@ import inventario.modelo.Modelo;
 import inventario.vista.VentanaPrincipal;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -32,11 +33,15 @@ public class Inventario {
     }
 
     public static void mostrarInterfaz() {
+boolean finalizado = true;
+        Control c = new Control(new Modelo());
 
-       Control c= new Control(new Modelo());
-//       Transaccion t= new Transaccion(c);
-//       t.init();
-        new VentanaPrincipal("INVENTARIO", c).init();
+       // while (finalizado) {
+//            new Timer(60000, (e) -> {
+//                c.restart();
+//            }).start();
+      //  }
+new VentanaPrincipal("INVENTARIO", c).init();
     }
 
 } //LLAVE CLASS
